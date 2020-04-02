@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
     const scroller = new Scroller('#root');
-    document.addEventListener('mousewheel', scroller.listenScroll)
+    scroller.scrollToCurrentSection(0);
+
+    document.addEventListener('wheel', (e) => scroller.listenScroll(e));
+
 
 })
