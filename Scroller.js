@@ -10,7 +10,7 @@ class Scroller {
         console.log(visibleSection);
         this.drawMenu();
         this.handleMenu();
-
+        this.myEvent = new Event('onFour');
 
     }
     listenScroll = (e) => {
@@ -26,12 +26,18 @@ class Scroller {
     scroll = (direction) => {
         if (direction === 1) {
             const isLastSection = this.currentSectionIndex === this.sections.length - 1;
-            if (isLastSection) return;
+            if (isLastSection) {
+
+                return;
+            };
         } else if (direction === -1) {
             const firstSection = this.currentSectionIndex === 0;
             if (firstSection) return;
         }
         this.currentSectionIndex += direction;
+        if (this.currentSectionIndex === this.sections.length - 1) {
+            document.dispatchEvent(this.myEvent);
+        }
         this.scrollToCurrentSection();
     }
     scrollToCurrentSection = (initial = this.currentSectionIndex) => {
@@ -65,6 +71,9 @@ class Scroller {
                 const index = Number(e.target.textContent);
                 this.scrollToCurrentSection(index - 1);
                 this.currentSectionIndex = index - 1;
+                if (this.currentSectionIndex === this.sections.length - 1) {
+                    document.dispatchEvent(this.myEvent)
+                }
             })
         })
     }

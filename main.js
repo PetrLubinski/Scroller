@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     scroller.scrollToCurrentSection(0);
 
     document.addEventListener('wheel', (e) => scroller.listenScroll(e));
+    document.addEventListener('onFour', () => console.log('four'));
 
 
 })
