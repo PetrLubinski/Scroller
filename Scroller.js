@@ -6,11 +6,8 @@ class Scroller {
         this.sectionsArr = Array.prototype.slice.call(this.sections);
         this.currentSectionIndex = 0;
         const visibleSection = this.sectionsArr.findIndex(this.isVisible);
-        //console.log(this.isVisible(this.sectionsArr[0]));
-        console.log(visibleSection);
         this.drawMenu();
         this.handleMenu();
-        this.myEvent = new Event('onFour');
 
     }
     listenScroll = (e) => {
@@ -20,7 +17,6 @@ class Scroller {
         setTimeout(() => { this.isThrottled = false }, 1000);
 
         const direction = e.deltaY > 0 ? 1 : -1;
-        console.log(e.deltaY)
         this.scroll(direction);
     }
     scroll = (direction) => {
@@ -35,9 +31,7 @@ class Scroller {
             if (firstSection) return;
         }
         this.currentSectionIndex += direction;
-        if (this.currentSectionIndex === this.sections.length - 1) {
-            document.dispatchEvent(this.myEvent);
-        }
+
         this.scrollToCurrentSection();
     }
     scrollToCurrentSection = (initial = this.currentSectionIndex) => {
@@ -71,9 +65,7 @@ class Scroller {
                 const index = Number(e.target.textContent);
                 this.scrollToCurrentSection(index - 1);
                 this.currentSectionIndex = index - 1;
-                if (this.currentSectionIndex === this.sections.length - 1) {
-                    document.dispatchEvent(this.myEvent)
-                }
+
             })
         })
     }
